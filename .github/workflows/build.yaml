@@ -8,19 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout kernel source
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Android kernel build
       uses: lemniskett/android-kernel-actions@master
       id: build
       with:
         arch: arm64
-        compiler: aosp-clang/android11-gsi/clang-r383902b
-        defconfig: rosemary_defconfig
+        compiler: aosp-clang/android12-gsi/clang-r416183b
+        defconfig: rosemary-mod_defconfig
         image: Image.gz-dtb
 
     - name: Upload Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: kernel
         path: |

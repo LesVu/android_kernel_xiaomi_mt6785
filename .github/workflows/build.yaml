@@ -1,0 +1,29 @@
+name: Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout kernel source
+      uses: actions/checkout@v3
+
+    - name: Android kernel build
+      uses: lemniskett/android-kernel-actions@master
+      id: build
+      with:
+        arch: arm64
+        compiler: aosp-clang/android11-gsi/clang-r383902b
+        defconfig: rosemary_defconfig
+        image: Image.gz-dtb
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: kernel
+        path: |
+          out/arch/arm64/boot/Image
+          out/arch/arm64/boot/Image.gz
+          out/arch/arm64/boot/Image.gz-dtb

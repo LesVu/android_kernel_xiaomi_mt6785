@@ -15,7 +15,7 @@ jobs:
       id: build
       with:
         arch: arm64
-        compiler: aosp-clang/android12-gsi/clang-r416183b
+        compiler: aosp-clang/android-15.0.0_r6/clang-r522817
         defconfig: rosemary-mod_defconfig
         image: Image.gz-dtb
 

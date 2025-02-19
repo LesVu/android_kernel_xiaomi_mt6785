@@ -8,51 +8,40 @@
 
   outputs = { self, nixpkgs, flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [
-        "x86_64-linux"
-        "aarch64-linux"
-        "x86_64-darwin"
-        "aarch64-darwin"
-      ];
-      perSystem =
-        { pkgs, system, ... }:
-        {
-          devShells.default = pkgs.mkShell {
-            buildInputs = with pkgs; [
-              git
-              gnumake
-              bc
-              bison
-              curl
-              zip
-              kmod
-              cpio
-              flex
-              libelf
-              openssl
-              libtommath
-              wget
-              dtc
-              cacert
-              python3
-              xz
-              clang
-              llvmPackages.bintools
-            ];
+      systems =
+        [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" "aarch64-darwin" ];
+      perSystem = { pkgs, system, ... }: {
+        devShells.default = (pkgs.mkShell.override {
+          stdenv = pkgs.pkgsLLVM.llvmPackages_18.stdenv;
+        }) {
+          packages = with pkgs; [
+            nil
+            nixfmt-classic
+            git
+            gnumake
+            bc
+            bison
+            curl
+            zip
+            kmod
+            cpio
+            flex
+            libelf
+            openssl
+            libtommath
+            wget
+            dtc
+            cacert
+            python3
+            xz
+          ];
 
-            CC = "clang";
-            HOSTCC = "clang";
-            HOSTCXX = "clang++";
-            LD = "ld.lld";
-            NM = "llvm-nm";
-            STRIP = "llvm-strip";
-            OBJCOPY = "llvm-objcopy";
-            OBJDUMP = "llvm-objdump";
-            READELF = "llvm-readelf";
-            LLVM_IAS = 1;
-            HOSTLD = "ld.lld";
-            HOSTAR = "llvm-ar";
-          };
-        };
+          HOSTCC = "clang";
+          HOSTCXX = "clang++";
+          LLVM_IAS = 1;
+          HOSTLD = "ld.lld";
+          HOSTAR = "llvm-ar";
+       };
+      };
     };
 }

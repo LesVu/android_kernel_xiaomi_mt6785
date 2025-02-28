@@ -14,21 +14,5 @@
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/base/power/include/power_gs_v1/
 
 obj-y += $(subst ",,$(CONFIG_MTK_PLATFORM))/
-obj-$(CONFIG_MACH_MT6739) += mtk_power_gs.o
-obj-$(CONFIG_MACH_MT6739) += mtk_power_gs_api.o
-obj-$(CONFIG_MACH_MT6768) += mtk_power_gs.o
-obj-$(CONFIG_MACH_MT6768) += mtk_power_gs_api.o
-obj-$(CONFIG_MACH_MT6771) += mtk_power_gs.o
-obj-$(CONFIG_MACH_MT6771) += mtk_power_gs_api.o
 obj-$(CONFIG_MACH_MT6785) += mtk_power_gs.o
 obj-$(CONFIG_MACH_MT6785) += mtk_power_gs_api.o
-obj-$(CONFIG_MACH_MT6765) += mtk_power_gs.o
-obj-$(CONFIG_MACH_MT6765) += mtk_power_gs_api.o
-obj-$(CONFIG_MACH_MT6885) += mtk_power_gs.o
-obj-$(CONFIG_MACH_MT6885) += mtk_power_gs_api.o
-obj-$(CONFIG_MACH_MT6893) += mtk_power_gs.o
-obj-$(CONFIG_MACH_MT6893) += mtk_power_gs_api.o
-obj-$(CONFIG_MACH_MT6873) += mtk_power_gs.o
-obj-$(CONFIG_MACH_MT6873) += mtk_power_gs_api.o
-obj-$(CONFIG_MACH_MT6853) += mtk_power_gs.o
-obj-$(CONFIG_MACH_MT6853) += mtk_power_gs_api.o

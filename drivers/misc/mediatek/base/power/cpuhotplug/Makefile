@@ -17,14 +17,3 @@ ccflags-y += -I$(srctree)/drivers/misc/mediatek/base/power/include
 obj-y += mtk_cpuhp_core.o
 obj-y += mtk_cpuhp_ppm.o
 obj-y += mtk_cpuhp_platform.o
-
-
-# platform dependent source and includes
-
-# MT6771
-ccflags-$(CONFIG_MACH_MT6771) += -I$(srctree)/drivers/misc/mediatek/freqhopping/$(CONFIG_MTK_PLATFORM)
-obj-$(CONFIG_MACH_MT6771) += mtk_cpuhp_mt6771.o
-
-# MT6775
-ccflags-$(CONFIG_MACH_MT6775) += -I$(srctree)/drivers/misc/mediatek/freqhopping/$(CONFIG_MTK_PLATFORM)
-obj-$(CONFIG_MACH_MT6775) += mtk_cpuhp_mt6771.o

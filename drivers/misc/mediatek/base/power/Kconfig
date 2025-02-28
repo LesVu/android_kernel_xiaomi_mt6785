@@ -16,15 +16,6 @@ config MTK_PTPOD
 	  changed which will depended on chip.
 	  If unsure, say N.
 
-config MTK_PTPOD_GPU
-        bool "MTK PTPOD GPU"
-        default n
-        ---help---
-          This kernel config can be used to enable gpu PTPOD.
-          When enable this option, gpu voltage will be
-          changed which will depended on chip.
-          If unsure, say N.
-
 config MTK_CPU_MSSV
 	bool "MTK CPU MSSV SUPPORT"
 	---help---
@@ -103,25 +94,9 @@ config MTK_QOS_FRAMEWORK
 	  will be enabled and set EMI hardware.
 	  If unsure, say N.
 
-config MTK_QOS_V1
-	bool "MTK QOS Framework Ver 1.0"
-	default y if MACH_MT6768
-	---help---
-	  This version support QOS ver 1.0 feature sets.
-	  The dram opp could be controlled by the BW prediction.
-	  It is also mapped with sspm qos v1.
-	  If unsure, say N.
-
 config MTK_QOS_V2
 	bool "MTK QOS Framework Ver 2.0"
 	default y if MACH_MT6785
-	default y if MACH_MT6885
-	default y if MACH_MT6873
-	default y if MACH_MT6853
-	default y if MACH_MT6893
-	default y if MACH_MT6833
-	default y if MACH_MT6877
-	default y if MACH_MT6781
 	select MTK_QOS_FRAMEWORK
 	---help---
 	  This version support QOS version 2.0 feature sets.

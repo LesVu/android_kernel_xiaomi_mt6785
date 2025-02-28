@@ -11,17 +11,7 @@
 # GNU General Public License for more details.
 #
 
-ifeq ($(CONFIG_MACH_MT6833),y)
-	PDIR = mt6833
-else ifeq ($(CONFIG_MACH_MT6893),y)
-	PDIR = mt6893
-else ifeq ($(CONFIG_MACH_MT6877),y)
-	PDIR = mt6877
-else ifeq ($(CONFIG_MACH_MT6781),y)
-	PDIR = mt6781
-else
-	PDIR = $(MTK_PLATFORM)
-endif
+PDIR = $(MTK_PLATFORM)
 
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/base/power/include/
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/base/power/include/spm/

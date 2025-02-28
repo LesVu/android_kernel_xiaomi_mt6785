@@ -37,7 +37,7 @@
 //#include <mmdvfs_mgr.h>
 /*#include <mtk_pmic_info.h>*/
 #endif
-#include <mtk_vcorefs_manager.h>
+
 
 #ifdef MTK_PERF_OBSERVER
 #include <mt-plat/mtk_perfobserver.h>

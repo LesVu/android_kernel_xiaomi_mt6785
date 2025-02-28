@@ -15,13 +15,7 @@ ifeq ($(CONFIG_MTK_GCOV_KERNEL),y)
 GCOV_PROFILE := y
 endif
 
-ifeq ($(CONFIG_MACH_MT6833),y)
-	PDIR = mt6833
-else ifeq ($(CONFIG_MACH_MT6893),y)
-	PDIR = mt6893
-else
-	PDIR = $(MTK_PLATFORM)
-endif
+PDIR = $(MTK_PLATFORM)
 
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/base/power/include/
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/include/mt-plat/

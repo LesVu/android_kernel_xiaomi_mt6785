@@ -33,23 +33,9 @@ $(info *MTK_GPU_VERSION 3 = $(word 3,$(MTK_GPU_VERSION)))
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/gpu/gpu_mali/mali_$(word 2,$(MTK_GPU_VERSION))/mali-$(word 3,$(MTK_GPU_VERSION))/drivers/gpu/arm/midgard/platform/mtk_platform_common/
 endif
 
-ifeq ($(CONFIG_MACH_MT6833), y)
-ccflags-y += \
-	-I$(srctree)/drivers/misc/mediatek/base/power/swpm_v1/mt6833/
-	obj-y += $(subst ",,mt6833)/
-else ifeq ($(CONFIG_MACH_MT6893), y)
-ccflags-y += \
-	-I$(srctree)/drivers/misc/mediatek/base/power/swpm_v1/mt6893/
-	obj-y += $(subst ",,mt6893)/
-else ifeq ($(CONFIG_MACH_MT6877), y)
-ccflags-y += \
-	-I$(srctree)/drivers/misc/mediatek/base/power/swpm_v1/mt6877/
-	obj-y += $(subst ",,mt6877)/
-else
 ccflags-y += \
 	-I$(srctree)/drivers/misc/mediatek/base/power/swpm_v1/$(CONFIG_MTK_PLATFORM)/
 	obj-y += $(subst ",,$(CONFIG_MTK_PLATFORM))/
-endif
 
 ifneq ($(CONFIG_FPGA_EARLY_PORTING),y)
 obj-y += mtk_swpm.o

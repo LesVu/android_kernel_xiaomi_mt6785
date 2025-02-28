@@ -40,8 +40,6 @@
 #include <linux/clk.h>
 #endif
 
-#include <mtk_spm_vcore_dvfs.h>
-
 /* #include <mach/mt_wtd.h> */
 #include <linux/time.h>
 #include <mtk_gpu_utility.h>

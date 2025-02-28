@@ -4505,7 +4505,7 @@ page_owner=on loop.max_part=16";
 	};
 
 #if (CONFIG_MTK_GAUGE_VERSION == 30)
-	#include "mediatek/bat_setting/mt6785_battery_prop.dtsi"
+	#include "mediatek/mt6785/bat_setting/mt6785_battery_prop.dtsi"
 #endif
 
 	mtkfb: mtkfb {
@@ -5591,7 +5591,7 @@ page_owner=on loop.max_part=16";
 
 &bat_gm30 {
 	suppld-maxim;
-	#include "mediatek/bat_setting/mt6785_battery_table.dtsi"
+	#include "mediatek/mt6785/bat_setting/mt6785_battery_table.dtsi"
 };
 
 &odm {
@@ -6047,10 +6047,10 @@ page_owner=on loop.max_part=16";
         };
 }; /* HAPTIC GPIO Settings -End */
 
-#include "mediatek/mt6359.dtsi"
-#include "mediatek/cust_mt6785_msdc.dtsi"
-#include "mediatek/mt6360.dtsi"
-#include "mediatek/mt6360_pd.dtsi"
+#include "mediatek/mt6785/mt6359.dtsi"
+#include "mediatek/mt6785/cust_mt6785_msdc.dtsi"
+#include "mediatek/mt6785/mt6360.dtsi"
+#include "mediatek/mt6785/mt6360_pd.dtsi"
 #ifdef CONFIG_MTK_ENABLE_GENIEZONE
-#include "mediatek/trusty.dtsi"
+#include "mediatek/mt6785/trusty.dtsi"
 #endif

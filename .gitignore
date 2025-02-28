@@ -125,3 +125,7 @@ all.config
 kernel/configs/android-*.cfg
 out
 .direnv
+
+.cache
+compile_commands.json
+TODO

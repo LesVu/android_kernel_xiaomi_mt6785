@@ -47,12 +47,8 @@ else
 ccflags-y  += -I$(srctree)/drivers/misc/mediatek/mcupm/$(PDIR)
 endif
 endif
-ifeq ($(CONFIG_MTK_APUSYS_SUPPORT),y)
-ccflags-y  += -I$(srctree)/drivers/misc/mediatek/apusys/power/2.0/$(PDIR)
-else
 ccflags-y  += -I$(srctree)/drivers/misc/mediatek/vpu/$(PDIR)
 ccflags-y  += -I$(srctree)/drivers/misc/mediatek/mdla/1.0
-endif
 
 ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6735"))
 ifeq ($(CONFIG_ARCH_MT6735),y)

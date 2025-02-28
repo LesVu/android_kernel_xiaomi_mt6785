@@ -16,8 +16,8 @@
 #include <dt-bindings/interrupt-controller/irq.h>
 #include <dt-bindings/interrupt-controller/arm-gic.h>
 #include <dt-bindings/pinctrl/mt6785-pinfunc.h>
-#include "mediatek/touchscreen.dtsi"
-#include "mediatek/cust_mt6785_fingerprint.dtsi"
+#include "mediatek/rosemary/touchscreen.dtsi"
+#include "mediatek/mt6785/cust_mt6785_fingerprint.dtsi"
 
 &reserved_memory {
 };
@@ -480,7 +480,7 @@
 }; /* IRTX GPIO Settings -End */
 
 #include "mediatek/rosemary/cust.dtsi"
-#include "mediatek/cust_rosemary_camera.dtsi"
-//#include "mediatek/cust_mt6785_touch_1080x2160.dtsi"
-#include "mediatek/cust_aw87xxx_audio.dtsi"
+#include "mediatek/rosemary/cust_rosemary_camera.dtsi"
+//#include "mediatek/mt6785/cust_mt6785_touch_1080x2160.dtsi"
+#include "mediatek/rosemary/cust_aw87xxx_audio.dtsi"
 /*End of this file, DO NOT ADD ANYTHING HERE*/

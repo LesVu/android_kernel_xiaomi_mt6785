@@ -1,10 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0
 
-ifeq ($(CONFIG_MACH_MT6781),y)
-ADSP_PLATFORM := mt6781
-else
 ADSP_PLATFORM := $(subst ",,$(CONFIG_MTK_PLATFORM))
-endif
 
 obj-y += adsp.o
 adsp-y := adsp_core.o adsp_fs.o adsp_semaphore.o adsp_logger.o adsp_feature_table.o

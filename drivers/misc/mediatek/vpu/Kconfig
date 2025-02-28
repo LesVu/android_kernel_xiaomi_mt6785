@@ -1,6 +1,5 @@
 config MTK_VPU_SUPPORT
 	bool "MediaTek VPU Driver"
-	select MTK_APUSYS_VPU
 	---help---
 	  Support image processing using VPU hardware.
 	  Customers and third party could use VPU to develop
@@ -11,7 +10,6 @@ config MTK_VPU_SUPPORT
 config MTK_VPU_SUPPORT_DEBUG
 	bool "MediaTek VPU Debugging Features"
 	depends on MTK_VPU_SUPPORT
-	select MTK_APUSYS_VPU_DEBUG
 	---help---
 	  Enable debug facilities of VPU, such as
 	  kernel logs, register dumps, device logs,

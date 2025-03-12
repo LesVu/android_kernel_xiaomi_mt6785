@@ -411,38 +411,11 @@ static signed int fm_cust_config_default(struct fm_cust_cfg *cfg)
 
 	/*Audio path config*/
 	if (g_fm_chip_type == FM_COMBO_CHIP) {
-		/* combo chip config MT6630,MT6632 */
-#ifdef CONFIG_MTK_MERGE_INTERFACE_SUPPORT
-		cfg->aud_cfg.aud_path = FM_AUD_MRGIF;
-		cfg->aud_cfg.i2s_info.status = FM_I2S_OFF;
-		cfg->aud_cfg.i2s_info.mode = FM_I2S_SLAVE;
-		if (g_fm_chipid == 0x6632)
-			cfg->aud_cfg.i2s_info.rate = FM_I2S_48K;
-		else
-			cfg->aud_cfg.i2s_info.rate = FM_I2S_44K;
-		cfg->aud_cfg.i2s_pad = FM_I2S_PAD_IO;
-#elif defined FM_DIGITAL_INPUT
-		cfg->aud_cfg.aud_path = FM_AUD_I2S;
-		cfg->aud_cfg.i2s_info.status = FM_I2S_OFF;
-		cfg->aud_cfg.i2s_info.mode = FM_I2S_SLAVE;
-		if (g_fm_chipid == 0x6632)
-			cfg->aud_cfg.i2s_info.rate = FM_I2S_48K;
-		else
-			cfg->aud_cfg.i2s_info.rate = FM_I2S_44K;
-		cfg->aud_cfg.i2s_pad = FM_I2S_PAD_IO;
-#elif defined FM_ANALOG_INPUT
-		cfg->aud_cfg.aud_path = FM_AUD_ANALOG;
-		cfg->aud_cfg.i2s_info.status = FM_I2S_STATE_ERR;
-		cfg->aud_cfg.i2s_info.mode = FM_I2S_MODE_ERR;
-		cfg->aud_cfg.i2s_info.rate = FM_I2S_SR_ERR;
-		cfg->aud_cfg.i2s_pad = FM_I2S_PAD_ERR;
-#else
 		cfg->aud_cfg.aud_path = FM_AUD_ERR;
 		cfg->aud_cfg.i2s_info.status = FM_I2S_STATE_ERR;
 		cfg->aud_cfg.i2s_info.mode = FM_I2S_MODE_ERR;
 		cfg->aud_cfg.i2s_info.rate = FM_I2S_SR_ERR;
 		cfg->aud_cfg.i2s_pad = FM_I2S_PAD_ERR;
-#endif
 	} else if ((g_fm_chip_type == FM_AD_DIE_CHIP) || (g_fm_chip_type == FM_SOC_CHIP)) {
 		/* MT6627 MT6580 MT6631 ?*/
 		cfg->aud_cfg.aud_path = FM_AUD_I2S;

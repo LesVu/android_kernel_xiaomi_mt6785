@@ -23,15 +23,12 @@ subdir-ccflags-y += -I$(srctree)/drivers/mmc/host/mediatek/$(MTK_PLATFORM)
 
 obj-$(CONFIG_MTK_L3C_PART) += l3c_part/
 obj-$(CONFIG_MTK_EMI) += emi/
-obj-$(CONFIG_MTK_EMI_BWL)	+= emi_bwl/
-obj-$(CONFIG_MTK_EMI_MPU) += emi_mpu/
 obj-$(CONFIG_MMPROFILE) += mmp/
 obj-$(CONFIG_MTK_BASE_POWER) += base/
 obj-$(CONFIG_MTK_SERIAL)	+= uart/
 obj-$(CONFIG_MTK_PMIC_NEW_ARCH)	+= pmic/
 obj-$(CONFIG_MTK_M4U)   += m4u/
 obj-$(CONFIG_MTK_PSEUDO_M4U)   += pseudo_m4u/
-obj-$(CONFIG_MTK_ICE_DEBUG) += ice_debug/
 obj-y += mmdvfs/
 ifneq ($(CONFIG_MTK_SYSTRACKER_DISABLE),y)
 obj-$(CONFIG_MTK_SYSTRACKER_V2)   += systracker/
@@ -47,7 +44,6 @@ obj-$(CONFIG_MTK_CONN_MD) += conn_md/
 
 obj-$(CONFIG_MTK_SECURITY_SW_SUPPORT) +=masp/
 
-obj-$(CONFIG_TRUSTONIC_TEE_SUPPORT) += gud/
 obj-$(CONFIG_MTK_TRUSTED_MEMORY_SUBSYSTEM) += trusted_mem/
 obj-$(CONFIG_MTK_ENABLE_GENIEZONE) += geniezone/
 obj-$(CONFIG_MTK_TEE_SANITY) += tee_sanity/
@@ -59,9 +55,7 @@ obj-y += timer/
 obj-$(CONFIG_MTK_ACCDET) += accdet/
 obj-$(CONFIG_MTK_DRAMC) += dramc/
 obj-$(CONFIG_MTK_DRAMC_WA) += dramc/
-obj-$(CONFIG_MTK_DBGTOP) += dbgtop/
 obj-$(CONFIG_MTK_DEBUG_LATCH) += debug_latch/
-obj-$(CONFIG_MTK_DEBUG_TRACER)	+= debug_tracer/
 obj-$(CONFIG_MTK_GIC_EXT) += ext_gic/
 obj-$(CONFIG_MTK_SYS_CIRQ) += cirq/
 obj-$(CONFIG_MTK_SECURITY_SW_SUPPORT) +=masp/
@@ -77,7 +71,6 @@ obj-$(CONFIG_MTK_FLASHLIGHT) += flashlight/
 obj-$(CONFIG_RT_FLASHLIGHT)     += flashlight/richtek/
 obj-$(CONFIG_MTK_VPU_SUPPORT) += vpu/
 obj-$(CONFIG_MTK_IN_HOUSE_TEE_SUPPORT) += mtee/
-obj-$(CONFIG_MTK_IN_HOUSE_TEE_SUPPORT) += gcpu/
 obj-$(CONFIG_MTK_MLOG) += mlog/
 obj-$(CONFIG_MTK_AUXADC)	+= auxadc/
 obj-$(CONFIG_MTK_GPT_SCHEME_SUPPORT)	+= partition/
@@ -94,8 +87,6 @@ endif
 ifneq ($(CONFIG_MTK_SENSORHUB), y)
 obj-$(CONFIG_MTK_TINYSYS_SCP_SUPPORT) += scp/
 endif
-obj-$(CONFIG_MTK_HIFIXDSP_SUPPORT) += hifi_dsp/
-obj-$(CONFIG_MTK_HIFIXDSP_SUPPORT) += hifidsp_audio_ipi/
 obj-$(CONFIG_MTK_AUDIODSP_SUPPORT) += adsp/
 obj-$(CONFIG_MTK_AUDIO_IPI) += audio_ipi/
 obj-$(CONFIG_MTK_CCCI_DEVICES)	+=  ccci_util/
@@ -126,22 +117,17 @@ obj-$(CONFIG_MU3_PHY)   += mu3phy/
 obj-$(CONFIG_USB_MU3D_DRV)  += mu3d/
 obj-$(CONFIG_MTK_RTC)	+= rtc/
 obj-$(CONFIG_MTK_XO)	+= xo/
-obj-$(CONFIG_MTK_DCXO)	+= dcxo/
 obj-$(CONFIG_MTK_CMDQ) += cmdq/
 obj-$(CONFIG_MTK_CMDQ) += mdp/
 obj-$(CONFIG_MTK_VDEC_FMT) += vdec_fmt/
 obj-$(CONFIG_MTK_SMI_EXT) += smi/
 obj-$(CONFIG_MTK_LCM) += lcm/
 obj-$(CONFIG_MTK_LCM) += ext_disp/
-ifneq ($(CONFIG_CUSTOM_KERNEL_HDMI), "")
-obj-$(CONFIG_MTK_HDMI_SUPPORT) += hdmi/
-endif
 ifeq (,$(filter $(CONFIG_MTK_PLATFORM_NAME), "mt6768" "mt6785"))
 obj-y += spi_slave_drv/
 endif
 obj-$(CONFIG_MTK_MT6382_BDG) += spi_slave_drv/
 obj-$(CONFIG_MTK_FB) += video/
-obj-$(CONFIG_MTK_DYNAMIC_FPS_FRAMEWORK_SUPPORT) += dfrc/
 obj-$(CONFIG_MTK_PMIC_WRAP_HAL) += pmic_wrap/
 obj-$(CONFIG_MTK_DFD_INTERNAL_DUMP) += dfd/
 obj-$(CONFIG_RT_REGMAP) += rt-regmap/
@@ -149,7 +135,6 @@ obj-$(CONFIG_MTK_VIDEOCODEC_DRIVER) += videocodec/
 obj-$(CONFIG_MTK_JPEG) += jpeg/
 obj-$(CONFIG_MTK_CCU) += ccu/src/
 
-obj-$(CONFIG_MTK_CQDMA) += cqdma/
 
 ifeq ($(CONFIG_MTK_GAUGE_VERSION),30)
 obj-y += power/
@@ -184,7 +169,6 @@ obj-y += rps/
 obj-$(CONFIG_MTK_MDDP_SUPPORT) += mddp/
 obj-$(CONFIG_MTK_USB2JTAG_SUPPORT) += usb2jtag/
 obj-y += subpmic/
-obj-$(CONFIG_MTK_GATE_IC) += gate_ic/
 obj-$(CONFIG_MTK_OTP) += otp/
 obj-$(CONFIG_MTK_SDA) += sda/
 obj-$(CONFIG_MTK_ULTRASND_PROXIMITY) += elliptic/

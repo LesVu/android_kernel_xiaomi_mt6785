@@ -314,12 +314,6 @@ do { \
 *                              F U N C T I O N S
 ********************************************************************************
 */
-#ifdef CONFIG_MTK_COMBO_CHIP_DEEP_SLEEP_SUPPORT
-INT32 stp_sdio_deep_sleep_flag_set(MTK_WCN_BOOL flag)
-{
-	return mtk_wcn_hif_sdio_deep_sleep_flag_set(flag);
-}
-#endif
 
 VOID stp_sdio_retry_flag_ctrl(INT32 flag)
 {
@@ -2744,9 +2738,7 @@ static INT32 stp_sdio_probe(const MTK_WCN_HIF_SDIO_CLTCTX clt_ctx,
 
 	STPSDIO_PR_DBG("enable interrupt done\n");
 
-#ifdef CONFIG_MTK_COMBO_CHIP_DEEP_SLEEP_SUPPORT
-	stp_sdio_deep_sleep_flag_set(MTK_WCN_BOOL_FALSE);
-#endif
+
 
 #if STP_SDIO_OWN_THREAD
 	ret = osal_thread_run(&g_stp_sdio_host_info.tx_rx_thread);
@@ -3424,9 +3416,7 @@ static INT32 stp_sdio_init(VOID)
 	if (ret)
 		STPSDIO_PR_ERR
 		    ("mtk_wcn_stp_wmt_sdio_op_reg(mtk_wcn_stp_sdio_own_ctrl) fail(%d)!\n", ret);
-#ifdef CONFIG_MTK_COMBO_CHIP_DEEP_SLEEP_SUPPORT
-	mtk_wcn_wmt_sdio_deep_sleep_flag_cb_reg(stp_sdio_deep_sleep_flag_set);
-#endif
+
 	mtk_wcn_wmt_sdio_rw_cb_reg(stp_sdio_reg_rw);
 
 #if STP_SDIO_DBG_SUPPORT && STP_SDIO_RXDBG

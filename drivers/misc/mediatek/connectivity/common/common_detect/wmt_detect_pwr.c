@@ -171,24 +171,6 @@ static int wmt_detect_chip_pwr_on(void)
 	msleep(MAX_OFF_STABLE_TIME);
 	/*PMU output high, and sleep for reset stable time*/
 	_wmt_detect_output_high(GPIO_COMBO_PMU_EN_PIN);
-#ifdef CONFIG_MTK_COMBO_COMM_NPWR
-	if ((gpio_ctrl_info.gpio_ctrl_state[GPIO_COMBO_I2S_DAT_PIN].gpio_num != INVALID_PIN_ID) &&
-		(gpio_ctrl_info.gpio_ctrl_state[GPIO_PCM_DAISYNC_PIN].gpio_num != INVALID_PIN_ID)) {
-		msleep(20);
-		_wmt_detect_output_high(GPIO_PCM_DAISYNC_PIN);
-
-		msleep(20);
-		_wmt_detect_output_high(GPIO_COMBO_I2S_DAT_PIN);
-
-		msleep(20);
-		_wmt_detect_output_low(GPIO_COMBO_I2S_DAT_PIN);
-
-		msleep(20);
-		_wmt_detect_output_low(GPIO_PCM_DAISYNC_PIN);
-
-		msleep(20);
-	}
-#endif
 	msleep(MAX_RST_STABLE_TIME);
 	/*RST output high, and sleep for power on stable time */
 	_wmt_detect_output_high(GPIO_COMBO_RST_PIN);

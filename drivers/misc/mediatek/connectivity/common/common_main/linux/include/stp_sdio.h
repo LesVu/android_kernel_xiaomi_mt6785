@@ -299,9 +299,7 @@ VOID stp_sdio_txdbg_dump(VOID);
 #endif
 
 extern INT32 mtk_wcn_stp_sdio_do_own_clr(VOID);
-#ifdef CONFIG_MTK_COMBO_CHIP_DEEP_SLEEP_SUPPORT
-INT32 stp_sdio_deep_sleep_flag_set(MTK_WCN_BOOL flag);
-#endif
+
 /* extern INT32 */
 /* mtk_wcn_stp_sdio_do_own_set (void); */
 

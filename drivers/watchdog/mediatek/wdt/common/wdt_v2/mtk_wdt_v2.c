@@ -49,7 +49,7 @@
 #ifndef __USING_DUMMY_WDT_DRV__
 #include <mt-plat/upmu_common.h>
 #endif
-#include <dbgtop.h>
+
 
 #ifdef CONFIG_MTK_CPU_KORO
 #include <mtk_koro.h>

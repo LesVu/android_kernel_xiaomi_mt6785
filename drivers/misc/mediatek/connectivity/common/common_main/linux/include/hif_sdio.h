@@ -343,9 +343,7 @@ extern VOID mtk_wcn_hif_sdio_enable_irq(MTK_WCN_HIF_SDIO_CLTCTX ctx, MTK_WCN_BOO
 extern INT32 mtk_wcn_hif_sdio_f0_writeb(MTK_WCN_HIF_SDIO_CLTCTX ctx, UINT32 offset, UINT8 vb);
 
 extern INT32 mtk_wcn_hif_sdio_f0_readb(MTK_WCN_HIF_SDIO_CLTCTX ctx, UINT32 offset, PUINT8 pvb);
-#ifdef CONFIG_MTK_COMBO_CHIP_DEEP_SLEEP_SUPPORT
-INT32 mtk_wcn_hif_sdio_deep_sleep_flag_set(MTK_WCN_BOOL flag);
-#endif
+
 
 #define DELETE_HIF_SDIO_CHRDEV 1
 #if !(DELETE_HIF_SDIO_CHRDEV)

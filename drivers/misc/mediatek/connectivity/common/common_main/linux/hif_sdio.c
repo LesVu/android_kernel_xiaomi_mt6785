@@ -537,13 +537,7 @@ static INT32 _hif_sdio_wake_up_ctrl(MTK_WCN_HIF_SDIO_CLTCTX ctx)
 
 	return ret;
 }
-#ifdef CONFIG_MTK_COMBO_CHIP_DEEP_SLEEP_SUPPORT
-INT32 mtk_wcn_hif_sdio_deep_sleep_flag_set(MTK_WCN_BOOL flag)
-{
-	g_hif_deep_sleep_flag = flag;
-	return 0;
-}
-#endif
+
 INT32 hif_sdio_wake_up_ctrl(MTK_WCN_HIF_SDIO_CLTCTX ctx)
 {
 	UINT32 i = 0;

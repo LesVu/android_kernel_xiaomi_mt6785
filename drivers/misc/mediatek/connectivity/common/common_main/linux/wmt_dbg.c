@@ -104,9 +104,7 @@ static INT32 wmt_dbg_lte_coex_test(INT32 par1, INT32 par2, INT32 par3);
 #ifdef CONFIG_TRACING
 static INT32 wmt_dbg_ftrace_dbg_log_ctrl(INT32 par1, INT32 par2, INT32 par3);
 #endif
-#ifdef CONFIG_MTK_COMBO_CHIP_DEEP_SLEEP_SUPPORT
-static INT32 wmt_dbg_deep_sleep_ctrl(INT32 par1, INT32 par2, INT32 par3);
-#endif
+
 static INT32 wmt_dbg_sdio_retry_ctrl(INT32 par1, INT32 par2, INT32 par3);
 
 static INT32 wmt_dbg_func0_reg_read(INT32 par1, INT32 address, INT32 value);
@@ -168,9 +166,7 @@ static const WMT_DEV_DBG_FUNC wmt_dev_dbg_func[] = {
 #ifdef CONFIG_TRACING
 	[0x1e] = wmt_dbg_ftrace_dbg_log_ctrl,
 #endif
-#ifdef CONFIG_MTK_COMBO_CHIP_DEEP_SLEEP_SUPPORT
-	[0x1f] = wmt_dbg_deep_sleep_ctrl,
-#endif
+
 	[0x20] = wmt_dbg_sdio_retry_ctrl,
 	[0x22] = wmt_dbg_func0_reg_read,
 	[0x23] = wmt_dbg_func0_reg_write,
@@ -766,13 +762,7 @@ static INT32 wmt_dbg_ftrace_dbg_log_ctrl(INT32 par1, INT32 par2, INT32 par3)
 }
 #endif
 
-#ifdef CONFIG_MTK_COMBO_CHIP_DEEP_SLEEP_SUPPORT
-static INT32 wmt_dbg_deep_sleep_ctrl(INT32 par1, INT32 par2, INT32 par3)
-{
-	WMT_INFO_FUNC("%s deep_sleep !!\n", par2 == 0 ? "disable" : "enable");
-	return wmt_lib_deep_sleep_ctrl(par2);
-}
-#endif
+
 
 static INT32 wmt_dbg_sdio_retry_ctrl(INT32 par1, INT32 par2, INT32 par3)
 {

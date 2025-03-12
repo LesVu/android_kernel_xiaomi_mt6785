@@ -65,16 +65,8 @@ static struct fm_callback *fm_cb_op;
 
 /* static bool rssi_th_set = false; */
 
-#if 0				/* def CONFIG_MTK_FM_50KHZ_SUPPORT */
-static struct fm_fifo *cqi_fifo;
-#endif
 static signed int mt6631_is_dese_chan(unsigned short freq);
 
-#if 0
-static signed int mt6631_mcu_dese(unsigned short freq, void *arg);
-static signed int mt6631_gps_dese(unsigned short freq, void *arg);
-static signed int mt6631_I2s_Setting(signed int onoff, signed int mode, signed int sample);
-#endif
 static unsigned short mt6631_chan_para_get(unsigned short freq);
 static signed int mt6631_desense_check(unsigned short freq, signed int rssi);
 static bool mt6631_TDD_chan_check(unsigned short freq);
@@ -2036,13 +2028,6 @@ signed int mt6631_fm_low_ops_register(struct fm_callback *cb, struct fm_basic_in
 		WCN_DBG(FM_ALT | CHIP, "6631 fm lib alloc tx buf failed\n");
 		ret = -1;
 	}
-#if 0				/* def CONFIG_MTK_FM_50KHZ_SUPPORT */
-	cqi_fifo = fm_fifo_create("6628_cqi_fifo", sizeof(struct adapt_fm_cqi), 640);
-	if (!cqi_fifo) {
-		WCN_DBG(FM_ALT | CHIP, "6631 fm lib create cqi fifo failed\n");
-		ret = -1;
-	}
-#endif
 
 	return ret;
 }
@@ -2056,9 +2041,6 @@ signed int mt6631_fm_low_ops_unregister(struct fm_basic_interface *bi)
 		return -FM_EPARA;
 	}
 
-#if 0				/* def CONFIG_MTK_FM_50KHZ_SUPPORT */
-	fm_fifo_release(cqi_fifo);
-#endif
 
 	if (cmd_buf) {
 		fm_free(cmd_buf);

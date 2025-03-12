@@ -163,10 +163,6 @@ typedef enum _ENUM_WMT_OPID_T {
 	WMT_OPID_BGW_DS = 21,
 	WMT_OPID_SET_MCU_CLK = 22,
 	WMT_OPID_ADIE_LPBK_TEST = 23,
-#ifdef CONFIG_MTK_COMBO_ANT
-	WMT_OPID_ANT_RAM_DOWN = 24,
-	WMT_OPID_ANT_RAM_STA_GET = 25,
-#endif
 #if CFG_WMT_LTE_COEX_HANDLING
 	WMT_OPID_IDC_MSG_HANDLING = 26,
 #endif
@@ -525,9 +521,7 @@ extern MTK_WCN_BOOL wmt_core_is_quick_ps_support(VOID);
 
 extern MTK_WCN_BOOL wmt_core_get_aee_dump_flag(VOID);
 extern MTK_WCN_BOOL wmt_core_trigger_stp_assert(VOID);
-#ifdef CONFIG_MTK_COMBO_CHIP_DEEP_SLEEP_SUPPORT
-extern MTK_WCN_BOOL wmt_core_deep_sleep_ctrl(INT32 value);
-#endif
+
 extern VOID wmt_core_set_coredump_state(ENUM_DRV_STS state);
 
 #if CFG_CORE_INTERNAL_TXRX

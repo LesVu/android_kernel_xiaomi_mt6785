@@ -157,11 +157,7 @@ enum wmt_init_status {
 };
 static INT32 gWmtInitStatus = WMT_INIT_NOT_START;
 static wait_queue_head_t gWmtInitWq;
-#ifdef CONFIG_MTK_COMBO_COMM_APO
-UINT32 always_pwr_on_flag = 1;
-#else
 UINT32 always_pwr_on_flag;
-#endif
 P_WMT_PATCH_INFO pPatchInfo;
 UINT32 pAtchNum;
 UINT32 currentLpbkStatus;

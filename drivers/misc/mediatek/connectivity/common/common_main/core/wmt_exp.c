@@ -395,14 +395,6 @@ INT32 mtk_wcn_stp_wmt_sdio_op_reg(PF_WMT_SDIO_PSOP own_cb)
 }
 EXPORT_SYMBOL(mtk_wcn_stp_wmt_sdio_op_reg);
 
-#ifdef CONFIG_MTK_COMBO_CHIP_DEEP_SLEEP_SUPPORT
-INT32 mtk_wcn_wmt_sdio_deep_sleep_flag_cb_reg(PF_WMT_SDIO_DEEP_SLEEP flag_cb)
-{
-	wmt_lib_sdio_deep_sleep_flag_set_cb_reg(flag_cb);
-	return 0;
-}
-EXPORT_SYMBOL(mtk_wcn_wmt_sdio_deep_sleep_flag_cb_reg);
-#endif
 
 INT32 mtk_wcn_wmt_sdio_rw_cb_reg(PF_WMT_SDIO_DEBUG reg_rw_cb)
 {
@@ -629,89 +621,6 @@ MTK_WCN_BOOL mtk_wcn_set_connsys_power_off_flag(MTK_WCN_BOOL value)
 }
 EXPORT_SYMBOL(mtk_wcn_set_connsys_power_off_flag);
 
-#ifdef CONFIG_MTK_COMBO_ANT
-/*
-*	ctrlId: get ram code status opId or ram code download opId
-*	pBuf: pointer to ANT ram code
-*	length: total length of ANT ram code
-*/
-ENUM_WMT_ANT_RAM_STATUS mtk_wcn_wmt_ant_ram_ctrl(ENUM_WMT_ANT_RAM_CTRL ctrlId, PUINT8 pBuf,
-						 UINT32 length, ENUM_WMT_ANT_RAM_SEQ seq)
-{
-	ENUM_WMT_ANT_RAM_STATUS eRet = 0;
-	P_OSAL_OP pOp = NULL;
-	MTK_WCN_BOOL bRet = MTK_WCN_BOOL_FALSE;
-	P_OSAL_SIGNAL pSignal;
-
-	/*1. parameter validation check */
-	/*for WMT_ANT_RAM_GET_STATUS, ignore pBuf and length */
-	/*for WMT_ANT_RAM_DOWNLOAD,
-	 *  pBuf must not be NULL, kernel space memory pointer
-	 *  length must be large than 0
-	 */
-	if ((ctrlId < WMT_ANT_RAM_GET_STATUS) || (ctrlId >= WMT_ANT_RAM_CTRL_MAX)) {
-		WMT_ERR_FUNC("error ctrlId:%d detected.\n", ctrlId);
-		eRet = WMT_ANT_RAM_PARA_ERR;
-		return eRet;
-	}
-
-	if ((ctrlId == WMT_ANT_RAM_DOWNLOAD) && ((pBuf == NULL) || (length <= 0) ||
-	     (length > 1000) || (seq >= WMT_ANT_RAM_SEQ_MAX) || (seq < WMT_ANT_RAM_START_PKT))) {
-		eRet = WMT_ANT_RAM_PARA_ERR;
-		WMT_ERR_FUNC
-			("error parameter detected, ctrlId:%d, pBuf:%p,length(0x%x),seq(%d) .\n",
-			ctrlId, pBuf, length, seq);
-		return eRet;
-	}
-	/*get WMT opId */
-	pOp = wmt_lib_get_free_op();
-	if (!pOp) {
-		WMT_DBG_FUNC("get_free_lxop fail\n");
-		return MTK_WCN_BOOL_FALSE;
-	}
-
-	pSignal = &pOp->signal;
-	pSignal->timeoutValue =
-	    (ctrlId == WMT_ANT_RAM_DOWNLOAD) ? MAX_FUNC_ON_TIME : MAX_EACH_WMT_CMD;
-
-	pOp->op.opId =
-	    (ctrlId == WMT_ANT_RAM_DOWNLOAD) ? WMT_OPID_ANT_RAM_DOWN : WMT_OPID_ANT_RAM_STA_GET;
-	pOp->op.au4OpData[0] = (size_t) pBuf;
-	pOp->op.au4OpData[1] = length;
-	pOp->op.au4OpData[2] = seq;
-
-
-	/*disable PSM monitor */
-	if (DISABLE_PSM_MONITOR()) {
-		WMT_ERR_FUNC("wake up failed\n");
-		wmt_lib_put_op_to_free_queue(pOp);
-		return MTK_WCN_BOOL_FALSE;
-	}
-	/*wakeup wmtd thread */
-	bRet = wmt_lib_put_act_op(pOp);
-
-	/*enable PSM monitor */
-	ENABLE_PSM_MONITOR();
-
-	WMT_INFO_FUNC("CMD_TEST, opid (%d), ret(%d),retVal(%zu) result(%s)\n",
-		      pOp->op.opId,
-		      bRet,
-		      pOp->op.au4OpData[2], MTK_WCN_BOOL_FALSE == bRet ? "failed" : "succeed");
-
-	/*check return value and return result */
-	if (bRet == MTK_WCN_BOOL_FALSE) {
-		eRet = WMT_ANT_RAM_OP_ERR;
-	} else {
-		eRet = (ctrlId == WMT_ANT_RAM_DOWNLOAD) ?
-		    WMT_ANT_RAM_DOWN_OK :
-		    ((pOp->op.au4OpData[2] == 1) ? WMT_ANT_RAM_EXIST : WMT_ANT_RAM_NOT_EXIST);
-	}
-
-	return eRet;
-
-}
-EXPORT_SYMBOL(mtk_wcn_wmt_ant_ram_ctrl);
-#endif
 MTK_WCN_BOOL mtk_wcn_wmt_do_reset(ENUM_WMTDRV_TYPE_T type)
 {
 	INT32 iRet = -1;

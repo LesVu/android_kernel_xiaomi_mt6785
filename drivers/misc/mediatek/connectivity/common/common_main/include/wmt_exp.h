@@ -313,31 +313,6 @@ typedef struct _MTK_WCN_WMT_WLAN_CB_INFO {
 	wmt_wlan_is_wifi_drv_own_cb wlan_is_wifi_drv_own_cb;
 } MTK_WCN_WMT_WLAN_CB_INFO, *P_MTK_WCN_WMT_WLAN_CB_INFO;
 
-#ifdef CONFIG_MTK_COMBO_ANT
-typedef enum _ENUM_WMT_ANT_RAM_CTRL_T {
-	WMT_ANT_RAM_GET_STATUS = 0,
-	WMT_ANT_RAM_DOWNLOAD = WMT_ANT_RAM_GET_STATUS + 1,
-	WMT_ANT_RAM_CTRL_MAX
-} ENUM_WMT_ANT_RAM_CTRL, *P_ENUM_WMT_ANT_RAM_CTRL;
-
-typedef enum _ENUM_WMT_ANT_RAM_SEQ_T {
-	WMT_ANT_RAM_START_PKT = 1,
-	WMT_ANT_RAM_CONTINUE_PKT = WMT_ANT_RAM_START_PKT + 1,
-	WMT_ANT_RAM_END_PKT = WMT_ANT_RAM_CONTINUE_PKT + 1,
-	WMT_ANT_RAM_SEQ_MAX
-} ENUM_WMT_ANT_RAM_SEQ, *P_ENUM_WMT_ANT_RAM_SEQ;
-
-typedef enum _ENUM_WMT_ANT_RAM_STATUS_T {
-	WMT_ANT_RAM_NOT_EXIST = 0,
-	WMT_ANT_RAM_EXIST = WMT_ANT_RAM_NOT_EXIST + 1,
-	WMT_ANT_RAM_DOWN_OK = WMT_ANT_RAM_EXIST + 1,
-	WMT_ANT_RAM_DOWN_FAIL = WMT_ANT_RAM_DOWN_OK + 1,
-	WMT_ANT_RAM_PARA_ERR = WMT_ANT_RAM_DOWN_FAIL + 1,
-	WMT_ANT_RAM_OP_ERR = WMT_ANT_RAM_PARA_ERR + 1,
-	WMT_ANT_RAM_MAX
-} ENUM_WMT_ANT_RAM_STATUS, *P_ENUM_WMT_ANT_RAM_STATUS;
-#endif
-
 extern INT32 mtk_wcn_wmt_wlan_reg(P_MTK_WCN_WMT_WLAN_CB_INFO pWmtWlanCbInfo);
 extern INT32 mtk_wcn_wmt_wlan_unreg(VOID);
 /*******************************************************************************
@@ -408,15 +383,9 @@ extern ENUM_WMT_FLASH_PATCH_STATUS mtk_wcn_wmt_flash_patch_ctrl(ENUM_WMT_FLASH_P
 		PUINT32 version, UINT32 checksum);
 
 #endif
-#ifdef CONFIG_MTK_COMBO_CHIP_DEEP_SLEEP_SUPPORT
-extern INT32 mtk_wcn_wmt_sdio_deep_sleep_flag_cb_reg(PF_WMT_SDIO_DEEP_SLEEP flag_cb);
-#endif
+
 extern INT32 mtk_wcn_wmt_sdio_rw_cb_reg(PF_WMT_SDIO_DEBUG reg_rw_cb);
 
-#ifdef CONFIG_MTK_COMBO_ANT
-extern ENUM_WMT_ANT_RAM_STATUS mtk_wcn_wmt_ant_ram_ctrl(ENUM_WMT_ANT_RAM_CTRL ctrlId, PUINT8 pBuf,
-							UINT32 length, ENUM_WMT_ANT_RAM_SEQ seq);
-#endif
 extern INT32 wmt_lib_set_aif(enum CMB_STUB_AIF_X aif, MTK_WCN_BOOL share);	/* set AUDIO interface options */
 extern VOID wmt_lib_ps_irq_cb(VOID);
 

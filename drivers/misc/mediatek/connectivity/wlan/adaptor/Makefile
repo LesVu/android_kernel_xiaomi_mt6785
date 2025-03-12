@@ -13,13 +13,6 @@ ccflags-y += \
     -I$(srctree)/drivers/misc/mediatek/connectivity/common/common_main/include \
     -I$(srctree)/drivers/misc/mediatek/connectivity/common/common_main/linux/include
 
-ifeq ($(CONNAC_VER), 2_0)
-ccflags-y += -I$(srctree)/drivers/misc/mediatek/connectivity/conninfra/include
-ccflags-y += -I$(srctree)/drivers/misc/mediatek/connectivity/conninfra/debug_utility
-ccflags-y += -I$(srctree)/drivers/misc/mediatek/connectivity/conninfra/debug_utility/include
-ccflags-y += -I$(srctree)/drivers/misc/mediatek/connectivity/conninfra/debug_utility/connsyslog
-ccflags-y += -I$(srctree)/drivers/misc/mediatek/connectivity/conninfra/debug_utility/coredump
-endif
 
 ifneq ($(CONFIG_MTK_CONNSYS_DEDICATED_LOG_PATH),)
 ccflags-y += -DCONFIG_MTK_CONNSYS_DEDICATED_LOG_PATH
@@ -33,13 +26,8 @@ else
     ccflags-y += -DWMT_IDC_SUPPORT=0
 endif
 
-ifeq ($(CONNAC_VER), 2_0)
-ccflags-y += -DCFG_ANDORID_CONNINFRA_SUPPORT=1
-ccflags-y += -DCFG_ANDORID_CONNINFRA_COREDUMP_SUPPORT=1
-else
 ccflags-y += -DCFG_ANDORID_CONNINFRA_SUPPORT=0
 ccflags-y += -DCFG_ANDORID_CONNINFRA_COREDUMP_SUPPORT=0
-endif
 
 ccflags-y += -D MTK_WCN_WMT_STP_EXP_SYMBOL_ABSTRACT
 
@@ -54,6 +42,4 @@ $(MODULE_NAME)-objs += fw_log_wifi.o
 $(MODULE_NAME)-objs += fw_log_ics.o
 $(MODULE_NAME)-objs += wlan_ring.o
 endif
-ifeq ($(CONNAC_VER), 2_0)
-$(MODULE_NAME)-objs += wifi_pwr_on.o
-endif
+

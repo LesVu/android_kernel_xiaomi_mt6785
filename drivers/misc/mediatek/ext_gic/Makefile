@@ -17,4 +17,4 @@ else
   obj-$(CONFIG_MTK_GIC_EXT) += mtk-gic-extend.o
 endif
 
-obj-y += $(subst ",,$(CONFIG_MTK_PLATFORM))/
+obj-y += mt6785/

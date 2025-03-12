@@ -11,7 +11,4 @@
 # GNU General Public License for more details.
 #
 
-MTK_PLATFORM := $(subst ",,$(CONFIG_MTK_PLATFORM))
-
-obj-$(CONFIG_MTK_EMI) += $(MTK_PLATFORM)/
-
+obj-$(CONFIG_MTK_EMI) += mt6785/

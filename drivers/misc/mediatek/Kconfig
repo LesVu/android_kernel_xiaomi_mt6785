@@ -137,9 +137,7 @@ endmenu  # Memory
 menu "Storage: EMMC, NAND, partition"
 source "drivers/misc/mediatek/partition/Kconfig"
 source "drivers/misc/mediatek/blocktag/Kconfig"
-source "drivers/misc/mediatek/io_boost/Kconfig"
 source "drivers/misc/mediatek/pidmap/Kconfig"
-source "drivers/misc/mediatek/nand/Kconfig"
 
 endmenu  # Storage
 
@@ -181,7 +179,6 @@ config MTK_LOW_POWER_MODULE
           Select "y" if you want to enable low power features.
           Select "n" if unsure.
 
-source "drivers/misc/mediatek/lpm/Kconfig"
 endmenu  # Power
 
 menu "MultiMedia, Display, Camera"
@@ -213,17 +210,6 @@ config MTK_SEC_VIDEO_PATH_SUPPORT
 	  relative options including: MTK_TEE_SUPPORT, MTK_GP_SUPPORT,
 	  MTK_DRM_L1_SUPPORT, MTK_PERSIST_PARTITION_SUPPORT,
 	  MTK_DRM_KEY_MNG_SUPPORT.
-
-config MTK_SVP_ON_MTEE_SUPPORT
-	bool "Enable MTK SVP on MTEE"
-	help
-	  This enable MTK TEE function of Widevine Level1,
-	  relative modules include: DRM, vdec, venc, cmdq, m4u, display,
-	  tplay/DXCC,ssvp, secmem, TEE frameworks, keyinstall, DAPC, MPU,
-	  ION, gralloc,RPMB, DXCC, mediacodec, WFD, MDP.etc
-	  relative options including: MTK_TEE_SUPPORT, MTK_GP_SUPPORT,
-	  MTK_DRM_L1_SUPPORT, MTK_PERSIST_PARTITION_SUPPORT,
-	  MTK_DRM_KEY_MNG_SUPPORT
 
 config MTK_DRM_KEY_MNG_SUPPORT
 	bool "Enable MTK DRM Key Manager Support"
@@ -290,7 +276,6 @@ source "drivers/misc/mediatek/ccmni/Kconfig"
 source "drivers/misc/mediatek/eccci/Kconfig"
 source "drivers/misc/mediatek/conn_md/Kconfig"
 source "drivers/misc/mediatek/btif/Kconfig"
-source "drivers/misc/mediatek/mddp/Kconfig"
 source "drivers/misc/mediatek/nfc/Kconfig"
 
 endmenu  # CONN
@@ -313,14 +298,12 @@ source "drivers/misc/mediatek/geniezone/Kconfig"
 source "drivers/misc/mediatek/tee_sanity/Kconfig"
 
 source "drivers/misc/mediatek/masp/Kconfig"
-source "drivers/misc/mediatek/mtee/Kconfig"
 endmenu  # Security
 
 menu "Other Peripherals"
 
 source "drivers/misc/mediatek/accdet/Kconfig"
 source "drivers/misc/mediatek/dramc/Kconfig"
-source "drivers/misc/mediatek/l3c_part/Kconfig"
 source "drivers/misc/mediatek/emi/Kconfig"
 source "drivers/misc/mediatek/ext_gic/Kconfig"
 source "drivers/misc/mediatek/cirq/Kconfig"
@@ -333,7 +316,6 @@ source "drivers/misc/mediatek/flashlight/Kconfig"
 source "drivers/misc/mediatek/flashlight/richtek/Kconfig"
 source "drivers/misc/mediatek/scp/Kconfig"
 source "drivers/misc/mediatek/leds/Kconfig"
-source "drivers/misc/mediatek/irtx/Kconfig"
 source "drivers/misc/mediatek/pwm/Kconfig"
 source "drivers/misc/mediatek/systracker/Kconfig"
 source "drivers/misc/mediatek/boot/Kconfig"
@@ -346,13 +328,10 @@ source "drivers/misc/mediatek/uart/Kconfig"
 source "drivers/misc/mediatek/usb11/Kconfig"
 source "drivers/misc/mediatek/usb20/Kconfig"
 source "drivers/misc/mediatek/ram_console/Kconfig"
-source "drivers/misc/mediatek/mu3d/Kconfig"
-source "drivers/misc/mediatek/mu3phy/Kconfig"
 source "drivers/misc/mediatek/rtc/Kconfig"
 source "drivers/misc/mediatek/xo/Kconfig"
 source "drivers/misc/mediatek/rt-regmap/Kconfig"
 source "drivers/misc/mediatek/typec/Kconfig"
-source "drivers/misc/mediatek/irrx/Kconfig"
 source "drivers/misc/mediatek/devmpu/Kconfig"
 source "drivers/misc/mediatek/performance/Kconfig"
 source "drivers/misc/mediatek/usb2jtag/Kconfig"
@@ -443,7 +422,6 @@ config NORMALKERNEL_PAGES
 endmenu  # Memory
 menu "Misc configs"
 
-source "drivers/misc/mediatek/mtprof/Kconfig"
 source "drivers/misc/mediatek/Kconfig.default"
 source "drivers/misc/mediatek/timer/Kconfig"
 source "drivers/misc/mediatek/debug_latch/Kconfig"
@@ -480,10 +458,7 @@ source "drivers/misc/mediatek/devapc/Kconfig"
 source "drivers/misc/mediatek/vow/Kconfig"
 source "drivers/misc/mediatek/log_store/Kconfig"
 source "drivers/misc/mediatek/mtprintk/Kconfig"
-source "drivers/misc/mediatek/mlog/Kconfig"
-source "drivers/misc/mediatek/mcupm/Kconfig"
 source "drivers/misc/mediatek/udi/Kconfig"
-source "drivers/misc/mediatek/otp/Kconfig"
 source "drivers/misc/mediatek/sda/Kconfig"
 
 endmenu    # Misc

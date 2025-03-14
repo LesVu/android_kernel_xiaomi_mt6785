@@ -13,28 +13,8 @@
 
 # driver code for MDP
 
-ifeq ($(CONFIG_MACH_MT6833),y)
-MTK_PLATFORM := "mt6833"
-else ifeq ($(CONFIG_MACH_MT6781),y)
-MTK_PLATFORM := "mt6781"
-else
 MTK_PLATFORM := $(CONFIG_MTK_PLATFORM)
-endif
 
-ccflags-$(CONFIG_MACH_MT6885) += -DCMDQ_MDP_ENABLE_SPR
-ccflags-$(CONFIG_MACH_MT6885) += -DMDP_MMPATH
-ccflags-$(CONFIG_MACH_MT6893) += -DCMDQ_MDP_ENABLE_SPR
-ccflags-$(CONFIG_MACH_MT6893) += -DMDP_MMPATH
-ccflags-$(CONFIG_MACH_MT6873) += -DCMDQ_MDP_ENABLE_SPR
-ccflags-$(CONFIG_MACH_MT6873) += -DMDP_MMPATH
-ccflags-$(CONFIG_MACH_MT6853) += -DCMDQ_MDP_ENABLE_SPR
-ccflags-$(CONFIG_MACH_MT6853) += -DMDP_MMPATH
-ccflags-$(CONFIG_MACH_MT6833) += -DCMDQ_MDP_ENABLE_SPR
-ccflags-$(CONFIG_MACH_MT6833) += -DMDP_MMPATH
-ccflags-$(CONFIG_MACH_MT6877) += -DCMDQ_MDP_ENABLE_SPR
-ccflags-$(CONFIG_MACH_MT6877) += -DMDP_MMPATH
-ccflags-$(CONFIG_MACH_MT6781) += -DCMDQ_MDP_ENABLE_SPR
-ccflags-$(CONFIG_MACH_MT6781) += -DMDP_MMPATH
 
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/smi/ \
 	     -I$(srctree)/drivers/misc/mediatek/smi/$(MTK_PLATFORM)/ \
@@ -46,16 +26,12 @@ ccflags-y += -I$(srctree)/drivers/misc/mediatek/smi/ \
 	     -I$(srctree)/drivers/staging/android/ion/mtk \
 	     -I$(srctree)/drivers/misc/mediatek/trusted_mem/public
 
-ccflags-$(CONFIG_MTK_CMDQ_MBOX_EXT) += -I$(srctree)/drivers/misc/mediatek/cmdq/mailbox/
 
 ifeq ($(CONFIG_MTK_CMDQ_V3),y)
-ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6739" "mt6768" "mt6771" "mt8168" "mt6785"))
+ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6785"))
 	ccflags-y += -I$(srctree)/drivers/misc/mediatek/cmdq/v3/ \
 		-I$(srctree)/drivers/misc/mediatek/cmdq/v3/$(MTK_PLATFORM)
 endif
-else ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt8167"))
-	ccflags-y += -I$(srctree)/drivers/misc/mediatek/cmdq/v2/ \
-		-I$(srctree)/drivers/misc/mediatek/cmdq/v2/$(MTK_PLATFORM)
 endif
 
 ifeq ($(or $(strip $(CONFIG_MTK_SVP_ON_MTEE_SUPPORT)), $(strip $(CONFIG_MTK_CAM_GENIEZONE_SUPPORT))),y)
@@ -104,27 +80,7 @@ ccflags-y += -DCMDQ_LARGE_MAX_FIRSTERROR_BUFFER
 endif
 
 # driver module
-obj-$(CONFIG_MTK_CMDQ_MBOX_EXT) += cmdq_record.o
-obj-$(CONFIG_MTK_CMDQ_MBOX_EXT) += cmdq_virtual.o
-obj-$(CONFIG_MTK_CMDQ_MBOX_EXT) += cmdq_device.o
-obj-$(CONFIG_MTK_CMDQ_MBOX_EXT) += mdp_driver.o
-obj-$(CONFIG_MTK_CMDQ_MBOX_EXT) += mdp_common.o
-#obj-y += cmdq_prof.o
-#obj-y += cmdq_test.o
-obj-$(CONFIG_MTK_CMDQ_MBOX_EXT) += mdp_event_common.o
-obj-$(CONFIG_MTK_CMDQ_MBOX_EXT) += cmdq_subsys_common.o
-obj-$(CONFIG_MTK_CMDQ_MBOX_EXT) += cmdq_helper_ext.o
 obj-y += mdp_ioctl_ex.o
 obj-y += mdp_m4u.o
 
-ifeq ($(strip $(CONFIG_MMPROFILE)),y)
-obj-$(CONFIG_MTK_CMDQ_MBOX_EXT) += cmdq_mmp.o
-endif
-
-ifeq ($(platformdir_exists), y)
-obj-$(CONFIG_MTK_CMDQ_MBOX_EXT) += $(subst ",,$(MTK_PLATFORM))/
-endif
-
-# mdp_sw_sync
-obj-$(CONFIG_MTK_CMDQ_MBOX_EXT) += sync/
 

@@ -25,11 +25,7 @@ subdir-ccflags-y += -I$(MTK_CUSTOM_PATH)/lens/main/inc
 subdir-ccflags-y += -I$(MTK_CUSTOM_PATH)/lens/main/common/lc898122af
 subdir-ccflags-y += -I$(MTK_CUSTOM_PATH)/lens/main/common/dw9800waf
 subdir-ccflags-y += -I$(MTK_CUSTOM_PATH)/lens/main/common/lc898212xdaf/inc
-ifeq ($(CONFIG_MTK_LENS_BU63165AF_SUPPORT), y)
-  subdir-ccflags-y += -I$(MTK_CUSTOM_PATH)/lens/main/common/bu63165af/inc
-else
-  subdir-ccflags-y += -I$(MTK_CUSTOM_PATH)/lens/main/common/bu63169af/inc
-endif
+subdir-ccflags-y += -I$(MTK_CUSTOM_PATH)/lens/main/common/bu63169af/inc
 
 ifeq ($(CONFIG_MTK_LENS_USE_MODULE), y)
 
@@ -69,17 +65,10 @@ MAIN_CFILES  += common/ov5645af/OV5645AF.c
 MAIN_CFILES  += common/ad5820af/AD5820AF.c
 MAIN_CFILES  += common/wv511aaf/WV511AAF.c
 MAIN_CFILES  += common/ak7371af/AK7371AF.c
-ifeq ($(CONFIG_MTK_LENS_BU63165AF_SUPPORT), y)
-MAIN_CFILES  += common/bu63165af/BU63165AF.c
-MAIN_CFILES  += common/bu63165af/OIS_func.c
-MAIN_CFILES  += common/bu63165af/OIS_main.c
-MAIN_CFILES  += common/bu63165af/OIS_user.c
-else
 MAIN_CFILES  += common/bu63169af/BU63169AF.c
 MAIN_CFILES  += common/bu63169af/OIS_func.c
 MAIN_CFILES  += common/bu63169af/OIS_main.c
 MAIN_CFILES  += common/bu63169af/OIS_user.c
-endif
 
 obj-m := mainaf.o
 mainaf-objs := $(MAIN_CFILES:.c=.o)
@@ -115,11 +104,6 @@ obj-y  += common/wv511aaf/
 obj-y  += common/ak7371af/
 obj-y  += common/gt9772af/
 obj-y  += common/gt9768af/
-ifeq ($(CONFIG_MTK_LENS_BU63165AF_SUPPORT), y)
-  obj-y  += common/bu63165af/
-else
-  obj-y  += common/bu63169af/
-endif
+obj-y  += common/bu63169af/
 obj-y  += common/bu64253gwzaf/
-
 endif

@@ -18,9 +18,6 @@ ccflags-y += -I$(srctree)/drivers/misc/mediatek/base/power/include/swpm_v1/
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/include/mt-plat
 
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/smi/
-ccflags-${CONFIG_MACH_MT6833} += -I$(srctree)/drivers/misc/mediatek/smi/mt6833/
-ccflags-${CONFIG_MACH_MT6877} += -I$(srctree)/drivers/misc/mediatek/smi/mt6877/
-ccflags-${CONFIG_MACH_MT6781} += -I$(srctree)/drivers/misc/mediatek/smi/mt6781/
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/smi/$(MTK_PLATFORM)/
 
 obj-y += swpm_me.o
@@ -28,47 +25,7 @@ obj-y += swpm_me.o
 FORCE_STEP0 := true
 SKIP_SMI_CONFIG := true
 
-ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6771"))
-ccflags-y += -DDYNAMIC_DISP_HRT
-SUPPORT_USE_DDR_TYPE := true
-SUPPORT_MMP := true
-FORCE_STEP0 := false
-BUILD_MMDVFS_PMQOS := true
-ccflags-y += -DAUTOK_FORCE_LOW
-else ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6765"))
-SUPPORT_MMP := true
-FORCE_STEP0 := false
-BUILD_MMDVFS_PMQOS := true
-else ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt8168"))
-ccflags-y += -DSMI_AQU
-ENABLE_SCENARIO := true
-FORCE_STEP0 := false
-PLL_HOPPING_READY := true
-else ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6768"))
-ccflags-y += -DSMI_TAL
-SUPPORT_MMP := true
-FORCE_STEP0 := false
-BUILD_MMDVFS_PMQOS := true
-else ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6739"))
-BUILD_MMDVFS_PMQOS := true
-else ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6785"))
-ifeq ($(CONFIG_MACH_MT6781),y)
-BUILD_MMDVFS := true
-BUILD_MMQOS := true
-MTK_FREQ_HOPPING := true
-ccflags-y += -DPMQOS_USE_IOMMU_PORT
-ccflags-y += -DCHECK_OSTD_UPDATE
-else
-BUILD_MMDVFS_PMQOS := true
-endif
-HRT_MECHANISM := true
-BLOCKING_MECHANISM := true
-SUPPORT_MMP := true
-SKIP_SMI_CONFIG := false
-QOS_BOUND_DETECT := true
-FORCE_STEP0 := false
-ccflags-y += -DCHECK_VOLTAGE
-else ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6885" "mt6893"))
+ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6785"))
 BUILD_MMDVFS_PMQOS := true
 HRT_MECHANISM := true
 BLOCKING_MECHANISM := true
@@ -77,38 +34,9 @@ SKIP_SMI_CONFIG := false
 QOS_BOUND_DETECT := true
 FORCE_STEP0 := false
 ccflags-y += -DCHECK_VOLTAGE
-ccflags-y += -DPMQOS_USE_IOMMU_PORT
-else ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6873"))
-BUILD_MMDVFS_PMQOS := true
-HRT_MECHANISM := true
-BLOCKING_MECHANISM := true
-SUPPORT_MMP := true
-SKIP_SMI_CONFIG := false
-QOS_BOUND_DETECT := true
-ccflags-y += -DPMQOS_USE_IOMMU_PORT
-FORCE_STEP0 := false
-ccflags-y += -DCHECK_VOLTAGE
-ccflags-y += -DCHECK_OSTD_UPDATE
-MTK_FREQ_HOPPING := true
-else ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6853"))
-BUILD_MMDVFS_PMQOS := true
-SUPPORT_MMP := true
-ccflags-y += -DPMQOS_USE_IOMMU_PORT
-FORCE_STEP0 := false
-ccflags-y += -DCHECK_VOLTAGE
-HRT_MECHANISM := true
-BLOCKING_MECHANISM := true
-SKIP_SMI_CONFIG := false
-QOS_BOUND_DETECT := true
-ccflags-y += -DCHECK_OSTD_UPDATE
-MTK_FREQ_HOPPING := true
 endif
 
-ifeq ($(CONFIG_MACH_MT6781),y)
-MMDVFS_PLATFORM_DIR=$(srctree)/drivers/misc/mediatek/mmdvfs/mt6853
-else
 MMDVFS_PLATFORM_DIR=$(srctree)/drivers/misc/mediatek/mmdvfs/$(MTK_PLATFORM)
-endif
 platformdir_exists=$(shell if [ -d $(MMDVFS_PLATFORM_DIR) ]; then echo "y"; else echo "n"; fi;)
 
 ifeq (true, $(BUILD_MMDVFS_PMQOS))

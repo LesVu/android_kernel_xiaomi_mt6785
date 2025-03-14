@@ -13,24 +13,9 @@
 
 ccflags-y += -I$(srctree)
 
-ifeq ($(CONFIG_MACH_MT6833),y)
-	PDIR = mt6833
-else ifeq ($(CONFIG_MACH_MT6893),y)
-	PDIR = mt6893
-else ifeq ($(CONFIG_MACH_MT6877),y)
-	PDIR = mt6877
-else ifeq ($(CONFIG_MACH_MT6781),y)
-	PDIR = mt6781
-else
-	PDIR = $(MTK_PLATFORM)
-endif
+PDIR = $(MTK_PLATFORM)
 
-ifeq ($(CONFIG_ARCH_MT7623), y)
-# MT2701 & MT7623 use the same thermal driver.
-THERMAL_CHIP_DRIVER_DIR := $(srctree)/drivers/misc/mediatek/thermal/mt2701
-else
 THERMAL_CHIP_DRIVER_DIR := $(srctree)/drivers/misc/mediatek/thermal/$(PDIR)
-endif
 
 ccflags-y  += -I$(THERMAL_CHIP_DRIVER_DIR)/inc
 ccflags-y  += -I$(srctree)/drivers/misc/mediatek/thermal/fakeHeader/
@@ -52,21 +37,5 @@ obj-$(CONFIG_THERMAL) += mtk_cooler_kshutdown.o
 #obj-$(CONFIG_THERMAL) += mtk_cooler_dropcall.o
 obj-$(CONFIG_THERMAL) += mtk_cooler_cam.o
 
-ifeq (,$(filter $(CONFIG_ARCH_MT8173) $(CONFIG_ARCH_MT8163) $(CONFIG_MACH_MT2701) $(CONFIG_ARCH_MT7623) $(CONFIG_ARCH_MT8127) $(CONFIG_MACH_MT8167), y))
 obj-y += common/
-endif
-
-ifeq ($(CONFIG_ARCH_MT7623), y)
-# MT2701 & MT7623 use the same thermal driver.
-obj-y += mt2701/
-else ifeq ($(CONFIG_MACH_MT6833),y)
-obj-y += mt6833/
-else ifeq ($(CONFIG_MACH_MT6893),y)
-obj-y += mt6893/
-else ifeq ($(CONFIG_MACH_MT6877),y)
-obj-y += mt6877/
-else ifeq ($(CONFIG_MACH_MT6781),y)
-obj-y += mt6781/
-else
 obj-y += $(subst ",,$(CONFIG_MTK_PLATFORM))/
-endif

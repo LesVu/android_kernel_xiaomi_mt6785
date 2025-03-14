@@ -11,15 +11,7 @@
 # GNU General Public License for more details.
 #
 
-ifeq ($(CONFIG_MACH_MT6833),y)
-SMI_PLATFORM := "mt6833"
-else ifeq ($(CONFIG_MACH_MT6877),y)
-SMI_PLATFORM := "mt6877"
-else ifeq ($(CONFIG_MACH_MT6781),y)
-SMI_PLATFORM := "mt6781"
-else
 SMI_PLATFORM := $(CONFIG_MTK_PLATFORM)
-endif
 
 ifeq ($(CONFIG_MTK_SMI_EXT), y)
 ccflags-y += -I$(srctree)/drivers/clk/mediatek/
@@ -42,51 +34,10 @@ ccflags-y += -I$(srctree)/drivers/misc/mediatek/sspm/$(MTK_PLATFORM)/
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/freqhopping/
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/freqhopping/$(CONFIG_MTK_PLATFORM)
 
-ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6739"))
-ccflags-y += -DSMI_ZIO
-ccflags-y += -DMMDVFS_HOOK
-ccflags-y += -I$(srctree)/drivers/clk/mediatek
-obj-y += mmdvfs_mgr_v3.o
-obj-y += mmdvfs_profile_adaptor.o
-obj-y += mmdvfs_mgr_util.o
-else ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6771"))
-ccflags-y += -DSMI_SYL
-ccflags-y += -DDYNAMIC_DISP_HRT
-ccflags-y += -DMMDVFS_HOOK
-ccflags-y += -I$(srctree)/drivers/clk/mediatek
-obj-y += mmdvfs_mgr_v3.o
-obj-y += mmdvfs_profile_adaptor.o
-obj-y += mmdvfs_mgr_util.o
-SUPPORT_USE_DDR_TYPE := true
-endif
-
 ifeq (true, $(SUPPORT_USE_DDR_TYPE))
 ccflags-y += -DUSE_DDR_TYPE
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/emi/$(MTK_PLATFORM)/
 ccflags-y += -I$(srctree)/drivers/misc/mediatek/emi/submodule/
-endif
-
-ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6873" "mt6885"))
-ccflags-y += -DSMI_5G
-endif
-
-ifneq (,$(filter $(SMI_PLATFORM), "mt6873" "mt6885" "mt6853" "mt6833" "mt6877"))
-ccflags-y += -DSMI_SSPM
-ccflags-y += -DPMQOS_USE_IOMMU_PORT
-ccflags-y += -I$(srctree)/drivers/misc/mediatek/sspm/v2/
-else
-ccflags-y += -I$(srctree)/drivers/misc/mediatek/sspm/
-endif
-
-ifneq (,$(filter $(SMI_PLATFORM), "mt6781"))
-ccflags-y += -DSMI_SSPM
-ccflags-y += -DPMQOS_USE_IOMMU_PORT
-ccflags-y += -I$(srctree)/drivers/misc/mediatek/sspm/mt6781
-ccflags-y += -I$(srctree)/drivers/misc/mediatek/sspm/v2
-endif
-
-ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6739" "mt6771"))
-ccflags-y += -DSMI_CCF_NO_DUMP
 endif
 
 obj-y += smi_drv.o

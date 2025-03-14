@@ -146,7 +146,6 @@ menu "Power, PMIC, Battery & Low Power related configs"
 source "drivers/misc/mediatek/pmic/Kconfig"
 source "drivers/misc/mediatek/pmic_wrap/Kconfig"
 source "drivers/misc/mediatek/power/Kconfig"
-source "drivers/misc/mediatek/subpmic/Kconfig"
 
 config MTK_BASE_POWER
 	bool "MediaTek power management"
@@ -159,16 +158,6 @@ config MTK_BASE_POWER
 source "drivers/misc/mediatek/base/power/Kconfig"
 source "drivers/misc/mediatek/power/Kconfig"
 source "drivers/misc/mediatek/thermal/Kconfig"
-source "drivers/misc/mediatek/pmsr/Kconfig"
-
-config MTK_SPMTWAM
-	tristate "Mediatek Signal profiling tool"
-	depends on OF
-	help
-	  For Mediatek low power signal profiling features.
-	  Profiling several hw signals for debug purposes.
-	  Select "y" if you want to use.
-	  Select "n" if you are not sure.
 
 config MTK_LOW_POWER_MODULE
         bool "Meditaek Low Power Module"
@@ -238,7 +227,6 @@ source "drivers/misc/mediatek/jpeg/Kconfig"
 source "drivers/misc/mediatek/smi/Kconfig"
 source "drivers/misc/mediatek/lcm/Kconfig"
 source "drivers/misc/mediatek/video/Kconfig"
-source "drivers/misc/mediatek/vdec_fmt/Kconfig"
 source "drivers/misc/mediatek/ext_disp/Kconfig"
 source "drivers/misc/mediatek/mmp/Kconfig"
 source "drivers/misc/mediatek/jpeg/Kconfig"
@@ -247,26 +235,7 @@ source "drivers/misc/mediatek/ccu/src/Kconfig"
 endmenu  # MM
 
 menu "Sensors"
-
-config MTK_SENSOR_SUPPORT
-	bool "MTK SENSOR SUPPORT"
-	help
-	  Sensor config for sensor feature in project.
-	  Please say Y here if you want to support and sensors
-	  with mediatek sensor architecture.
-	  If unsure, say N.
-
-config MTK_SENSOR_ARCHITECTURE
-	string "MTK SENSOR ARCHITECTURE"
-	default "dummy"
-	help
-	  Sensor config for sensor architecture in project.
-	  Please set 1.0/2.0/3.0 etc if you want to support sensor
-	  with mediatek sensor architecture.
-	  If unsure, set dummy.
-
-source "drivers/misc/mediatek/sensors-1.0/Kconfig"
-source "drivers/misc/mediatek/sensor/2.0/Kconfig"
+source "drivers/misc/mediatek/sensor/Kconfig"
 endmenu  # Sensors
 
 menu "Modem & Connectivity"
@@ -292,7 +261,6 @@ config MTK_TEE_GP_SUPPORT
 	  TEE or other 3rd-party TEE)
 
 source "drivers/misc/mediatek/teei/Kconfig"
-source "drivers/misc/mediatek/tkcore/Kconfig"
 source "drivers/misc/mediatek/trusted_mem/Kconfig"
 source "drivers/misc/mediatek/geniezone/Kconfig"
 source "drivers/misc/mediatek/tee_sanity/Kconfig"
@@ -308,7 +276,6 @@ source "drivers/misc/mediatek/emi/Kconfig"
 source "drivers/misc/mediatek/ext_gic/Kconfig"
 source "drivers/misc/mediatek/cirq/Kconfig"
 source "drivers/misc/mediatek/m4u/Kconfig"
-source "drivers/misc/mediatek/pseudo_m4u/Kconfig"
 
 source "drivers/misc/mediatek/atf/Kconfig"
 source "drivers/misc/mediatek/lens/Kconfig"
@@ -317,24 +284,18 @@ source "drivers/misc/mediatek/flashlight/richtek/Kconfig"
 source "drivers/misc/mediatek/scp/Kconfig"
 source "drivers/misc/mediatek/leds/Kconfig"
 source "drivers/misc/mediatek/pwm/Kconfig"
-source "drivers/misc/mediatek/systracker/Kconfig"
 source "drivers/misc/mediatek/boot/Kconfig"
 source "drivers/misc/mediatek/boot_reason/Kconfig"
 source "drivers/misc/mediatek/chip/Kconfig"
 source "drivers/misc/mediatek/sched/Kconfig"
 source "drivers/misc/mediatek/audio_ipi/Kconfig"
 source "drivers/misc/mediatek/adsp/Kconfig"
-source "drivers/misc/mediatek/uart/Kconfig"
-source "drivers/misc/mediatek/usb11/Kconfig"
-source "drivers/misc/mediatek/usb20/Kconfig"
 source "drivers/misc/mediatek/ram_console/Kconfig"
 source "drivers/misc/mediatek/rtc/Kconfig"
-source "drivers/misc/mediatek/xo/Kconfig"
 source "drivers/misc/mediatek/rt-regmap/Kconfig"
 source "drivers/misc/mediatek/typec/Kconfig"
 source "drivers/misc/mediatek/devmpu/Kconfig"
 source "drivers/misc/mediatek/performance/Kconfig"
-source "drivers/misc/mediatek/usb2jtag/Kconfig"
 endmenu # Other Peripheral
 
 menu "Performance, Power, and Thermal"
@@ -373,7 +334,6 @@ config MTK_CORE_CTL
 	  If you are not sure about whether to enable it or not,
 	  please set n.
 
-source "drivers/misc/mediatek/task_turbo/Kconfig"
 endmenu # PPT
 
 menu "Memory configs"
@@ -452,14 +412,11 @@ source "drivers/misc/mediatek/dfd/Kconfig"
 source "drivers/misc/mediatek/sched/Kconfig"
 source "drivers/misc/mediatek/selinux_warning/Kconfig"
 source "drivers/misc/mediatek/sync/Kconfig"
-source "drivers/misc/mediatek/videocodec/Kconfig"
 source "drivers/misc/mediatek/vpu/Kconfig"
 source "drivers/misc/mediatek/devapc/Kconfig"
 source "drivers/misc/mediatek/vow/Kconfig"
 source "drivers/misc/mediatek/log_store/Kconfig"
 source "drivers/misc/mediatek/mtprintk/Kconfig"
-source "drivers/misc/mediatek/udi/Kconfig"
-source "drivers/misc/mediatek/sda/Kconfig"
 
 endmenu    # Misc
 

@@ -24,14 +24,9 @@ subdir-ccflags-y += -I$(srctree)/drivers/mmc/host/mediatek/$(MTK_PLATFORM)
 obj-$(CONFIG_MTK_EMI) += emi/
 obj-$(CONFIG_MMPROFILE) += mmp/
 obj-$(CONFIG_MTK_BASE_POWER) += base/
-obj-$(CONFIG_MTK_SERIAL)	+= uart/
 obj-$(CONFIG_MTK_PMIC_NEW_ARCH)	+= pmic/
 obj-$(CONFIG_MTK_M4U)   += m4u/
-obj-$(CONFIG_MTK_PSEUDO_M4U)   += pseudo_m4u/
 obj-y += mmdvfs/
-ifneq ($(CONFIG_MTK_SYSTRACKER_DISABLE),y)
-obj-$(CONFIG_MTK_SYSTRACKER_V2)   += systracker/
-endif
 
 obj-$(CONFIG_NFC_CHIP_SUPPORT) += nfc/
 
@@ -68,17 +63,8 @@ obj-$(CONFIG_MTK_VPU_SUPPORT) += vpu/
 obj-$(CONFIG_MTK_AUXADC)	+= auxadc/
 obj-$(CONFIG_MTK_GPT_SCHEME_SUPPORT)	+= partition/
 obj-$(CONFIG_MTK_PWM)	    += pwm/
-ifeq ($(CONFIG_MTK_SENSORHUB), y)
 obj-$(CONFIG_MTK_TINYSYS_SCP_SUPPORT) += scp/
-endif
-ifeq ($(subst ",,$(CONFIG_MTK_SENSOR_ARCHITECTURE)),1.0)
-obj-y += sensors-1.0/
-else
 obj-y += sensor/
-endif
-ifneq ($(CONFIG_MTK_SENSORHUB), y)
-obj-$(CONFIG_MTK_TINYSYS_SCP_SUPPORT) += scp/
-endif
 obj-$(CONFIG_MTK_AUDIODSP_SUPPORT) += adsp/
 obj-$(CONFIG_MTK_AUDIO_IPI) += audio_ipi/
 obj-$(CONFIG_MTK_CCCI_DEVICES)	+=  ccci_util/
@@ -90,15 +76,12 @@ obj-$(CONFIG_ZONE_MOVABLE_CMA) += zone_movable_cma/
 obj-$(CONFIG_MTK_VIBRATOR) += vibrator/
 obj-$(CONFIG_MTK_BLOCK_TAG) += blocktag/
 obj-$(CONFIG_MTK_LEDS)	+= leds/
-obj-$(CONFIG_USB_MTK_HDRC) += usb20/
-obj-$(CONFIG_MTK_USBFSH) += usb11/
 obj-$(CONFIG_MTK_BOOT) += boot/
 obj-$(CONFIG_MTK_BOOT_REASON) += boot_reason/
 obj-$(CONFIG_MTK_CHIP) += chip/
 obj-$(CONFIG_MTK_DEVAPC) += devapc/
 obj-$(CONFIG_MTK_SYNC) += sync/
 obj-$(CONFIG_MICROTRUST_TEE_SUPPORT) += teei/
-obj-$(CONFIG_TRUSTKERNEL_TEE_SUPPORT) += tkcore/
 obj-$(CONFIG_MTK_DEVMPU) += devmpu/
 obj-y += pidmap/
 obj-$(CONFIG_MTK_RAM_CONSOLE) += ram_console/
@@ -106,14 +89,12 @@ obj-$(CONFIG_MEDIATEK_SOLUTION)	+= aee/
 obj-$(CONFIG_MEDIATEK_SOLUTION) += sched/
 obj-$(CONFIG_USB_MTK_HDRC) += usb20/
 obj-$(CONFIG_MTK_RTC)	+= rtc/
-obj-$(CONFIG_MTK_XO)	+= xo/
 obj-$(CONFIG_MTK_CMDQ) += cmdq/
 obj-$(CONFIG_MTK_CMDQ) += mdp/
-obj-$(CONFIG_MTK_VDEC_FMT) += vdec_fmt/
 obj-$(CONFIG_MTK_SMI_EXT) += smi/
 obj-$(CONFIG_MTK_LCM) += lcm/
 obj-$(CONFIG_MTK_LCM) += ext_disp/
-ifeq (,$(filter $(CONFIG_MTK_PLATFORM_NAME), "mt6768" "mt6785"))
+ifeq (,$(filter $(CONFIG_MTK_PLATFORM_NAME), "mt6785"))
 obj-y += spi_slave_drv/
 endif
 obj-$(CONFIG_MTK_MT6382_BDG) += spi_slave_drv/
@@ -121,15 +102,12 @@ obj-$(CONFIG_MTK_FB) += video/
 obj-$(CONFIG_MTK_PMIC_WRAP_HAL) += pmic_wrap/
 obj-$(CONFIG_MTK_DFD_INTERNAL_DUMP) += dfd/
 obj-$(CONFIG_RT_REGMAP) += rt-regmap/
-obj-$(CONFIG_MTK_VIDEOCODEC_DRIVER) += videocodec/
 obj-$(CONFIG_MTK_JPEG) += jpeg/
 obj-$(CONFIG_MTK_CCU) += ccu/src/
 
 
 ifeq ($(CONFIG_MTK_GAUGE_VERSION),30)
 obj-y += power/
-else
-obj-$(CONFIG_MACH_MT8167)+= power/
 endif
 obj-y += log_store/
 obj-$(CONFIG_MTK_ECCCI_C2K) += c2k_usb/
@@ -148,12 +126,6 @@ obj-y += met_drv/
 endif
 obj-y += perf/
 obj-$(CONFIG_MTK_JPEG) += jpeg/
-obj-$(CONFIG_MTK_SPMTWAM) += twam/
-obj-$(CONFIG_MTK_PMSR) += pmsr/
-obj-$(CONFIG_MTK_TASK_TURBO) += task_turbo/
-obj-$(CONFIG_MTK_UNIFIED_DEBUG_INTERFACE) += udi/
+
 obj-y += rps/
-obj-$(CONFIG_MTK_USB2JTAG_SUPPORT) += usb2jtag/
-obj-y += subpmic/
-obj-$(CONFIG_MTK_SDA) += sda/
 obj-$(CONFIG_MTK_ULTRASND_PROXIMITY) += elliptic/

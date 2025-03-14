@@ -10,12 +10,8 @@
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 # See http://www.gnu.org/licenses/gpl-2.0.html for more details.
 #
-ifeq ($(CONFIG_MACH_MT6877),y)
-MTK_PLATFORM := mt6853
-else
-MTK_PLATFORM := $(subst ",,$(CONFIG_MTK_PLATFORM))
-endif
 
+MTK_PLATFORM := $(subst ",,$(CONFIG_MTK_PLATFORM))
 
 ifeq ($(CONFIG_MTK_TINYSYS_SCP_SUPPORT),y)
 

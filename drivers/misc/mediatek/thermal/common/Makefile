@@ -11,17 +11,7 @@
 # GNU General Public License for more details.
 #
 
-ifeq ($(CONFIG_MACH_MT6833),y)
-	PDIR = mt6833
-else ifeq ($(CONFIG_MACH_MT6893),y)
-	PDIR = mt6893
-else ifeq ($(CONFIG_MACH_MT6877),y)
-	PDIR = mt6877
-else ifeq ($(CONFIG_MACH_MT6781),y)
-	PDIR = mt6781
-else
-	PDIR = $(MTK_PLATFORM)
-endif
+PDIR = $(MTK_PLATFORM)
 
 THERMAL_CHIP_DRIVER_DIR := $(srctree)/drivers/misc/mediatek/thermal/$(PDIR)
 ccflags-y  += -I$(THERMAL_CHIP_DRIVER_DIR)/inc
@@ -35,24 +25,9 @@ ccflags-y  += -I$(srctree)/drivers/misc/mediatek/base/power/eem_v1/inc/
 ccflags-y  += -I$(srctree)/drivers/misc/mediatek/vpu/$(PDIR)
 ccflags-y  += -I$(srctree)/drivers/misc/mediatek/mdla/1.0
 
-ifneq (,$(filter $(CONFIG_MTK_PLATFORM), "mt6735"))
-ifeq ($(CONFIG_ARCH_MT6735),y)
-ccflags-y  += -I$(THERMAL_CHIP_DRIVER_DIR)/inc/D1
-endif
-
-ifeq ($(CONFIG_ARCH_MT6735M),y)
-ccflags-y  += -I$(THERMAL_CHIP_DRIVER_DIR)/inc/D2
-endif
-
-ifeq ($(CONFIG_ARCH_MT6753),y)
-ccflags-y  += -I$(THERMAL_CHIP_DRIVER_DIR)/inc/D3
-endif
-endif
-
 obj-  := dummy.o
-ifeq ($(CONFIG_THERMAL), y)
-else
-    obj-y += mtk_thermal_dummy.o
+ifeq ($(CONFIG_THERMAL),)
+obj-y += mtk_thermal_dummy.o
 endif
 
 obj-$(CONFIG_THERMAL) += mtk_thermal_platform.o

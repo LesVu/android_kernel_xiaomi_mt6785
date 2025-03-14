@@ -27,5 +27,4 @@
 # any damages of any kind arising from your use or distribution of
 # this program.
 
-source "drivers/misc/mediatek/timer/accuracy-test/Kconfig"
 source "drivers/misc/mediatek/timer/timesync/Kconfig"

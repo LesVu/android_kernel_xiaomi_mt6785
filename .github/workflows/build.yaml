@@ -7,23 +7,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout kernel source
-      uses: actions/checkout@v4
+      - name: Checkout kernel source
+        uses: actions/checkout@v4
 
-    - name: Android kernel build
-      uses: lemniskett/android-kernel-actions@master
-      id: build
-      with:
-        arch: arm64
-        compiler: aosp-clang/android15-qpr1-release/clang-r522817
-        defconfig: rosemary-mod_defconfig
-        image: Image.gz-dtb
+      - name: Android kernel build
+        uses: LesVu/android-kernel-actions@master
+        id: build
+        with:
+          arch: arm64
+          compiler: aosp-clang/android15-qpr1-release/clang-r522817
+          defconfig: rosemary-mod_defconfig
+          image: Image.gz-dtb
 
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: kernel
-        path: |
-          out/arch/arm64/boot/Image
-          out/arch/arm64/boot/Image.gz
-          out/arch/arm64/boot/Image.gz-dtb
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: kernel
+          path: |
+            out/arch/arm64/boot/Image
+            out/arch/arm64/boot/Image.gz
+            out/arch/arm64/boot/Image.gz-dtb

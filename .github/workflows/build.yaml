@@ -1,0 +1,27 @@
+name: Build on Tag
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout kernel source
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 1
+      - name: Android kernel build
+        uses: lemniskett/android-kernel-actions@master
+        id: build
+        env:
+          NAME: KMod
+        with:
+          arch: arm64
+          compiler: aosp-clang/android13-gsi/clang-r450784d
+          defconfig: rosemary-mod_defconfig
+          image: Image.gz
+      - name: Release build
+        uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          draft: true
+          tag: "KMod"
+          artifacts: ${{ steps.build.outputs.outfile }}
